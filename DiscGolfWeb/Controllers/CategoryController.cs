@@ -25,6 +25,10 @@ namespace DiscGolfWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "The DisplayOrder Can't Match the Name");
+            }
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);
